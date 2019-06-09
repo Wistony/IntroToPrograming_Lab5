@@ -54,5 +54,56 @@ void picture::writePicture()
     header.depth = int(header.depth * factor);
     header.width = int(header.width * factor); // NEW EDIT
     
+    RGBQUAD **ARRAY = new RGBQUAD*[header.depth];
+    for (int i = 0; i < header.depth; i++) {
+        ARRAY[i] = new RGBQUAD[header.width];
+    }
+    
+    
+    for (int i=0; i< header.depth; i++) // по Oy
+    {
+        for (int j=0; j< header.width; j++) // по Ox
+        {
+            ARRAY[i][j].blueComponent = array[1][2].blueComponent;
+            ARRAY[i][j].greenComponent = array[1][2].greenComponent;
+            ARRAY[i][j].redComponent = array[1][2].redComponent;
+            
+        }
+    }
+    
+    
+    fwrite(&header.id, sizeof(header.id), 1, fp2);
+    fwrite(&header.filesize, sizeof(header.filesize), 1, fp2);
+    fwrite(&header.reserved, sizeof(header.reserved), 1, fp2);
+    fwrite(&header.headersize, sizeof(header.headersize), 1, fp2);
+    fwrite(&header.infoSize, sizeof(header.infoSize), 1, fp2);
+    fwrite(&header.width, sizeof(header.width), 1, fp2);
+    fwrite(&header.depth, sizeof(header.depth), 1, fp2);
+    fwrite(&header.biPlanes, sizeof(header.biPlanes), 1, fp2);
+    fwrite(&header.bits, sizeof(header.bits), 1, fp2);
+    fwrite(&header.biCompression, sizeof(header.biCompression), 1, fp2);
+    fwrite(&header.biSizeImage, sizeof(header.biSizeImage), 1, fp2);
+    fwrite(&header.biXPelsPerMeter, sizeof(header.biXPelsPerMeter), 1, fp2);
+    fwrite(&header.biYPelsPerMeter, sizeof(header.biYPelsPerMeter), 1, fp2);
+    fwrite(&header.biClrUsed, sizeof(header.biClrUsed), 1, fp2);
+    fwrite(&header.biClrImportant, sizeof(header.biClrImportant), 1, fp2);
+    
+    for (int i = 0; i < header.depth; i++) {
+        for (int j = 0; j < header.width; j++) {
+            fwrite(&ARRAY[i][j].blueComponent, 1, 1, fp2);
+            fwrite(&ARRAY[i][j].greenComponent, 1, 1, fp2);
+            fwrite(&ARRAY[i][j].redComponent, 1, 1, fp2);
+            
+            //            cout << "new pixel: [ " << i << " " << j << " ] " << int(ARRAY[i][j].redComponent) << " " << int(ARRAY[i][j].greenComponent) << " "<<  int(ARRAY[i][j].blueComponent) << endl;
+            
+        }
+        int8_t empty = 0x00;
+        if (stride != 0) {
+            fwrite(&empty, 1, stride, fp2);
+        }
+    }
+    
+    fclose(fp2);
+    
 
 }
