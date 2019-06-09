@@ -9,5 +9,4 @@ int main() {
 	Coordinate t = temp + first;
 	t.getCoordinate();
 	cin.get();
-	//some commit;
 }
