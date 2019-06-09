@@ -55,18 +55,3 @@ float Coordinate::distance(Coordinate second) {
 	float len = diff.length();
 	return len;
 }
-
-Coordinate Coordinate::CrossProduct(Coordinate edge2)
-{
-	Coordinate result(this->y * edge2.z - this->z * edge2.y,
-		this->z * edge2.x - this->x * edge2.z,
-		this->x * edge2.y - this->y * edge2.x);
-
-	return result;
-}
-
-float Coordinate::DotProduct(Coordinate other)
-{
-	float result = this->x * other.x + this->y * other.y + this->z * other.z;
-	return result;
-}

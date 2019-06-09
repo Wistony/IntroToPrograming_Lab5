@@ -19,6 +19,4 @@ public:
 	bool operator==(Coordinate);
 
 	float distance(Coordinate);
-	Coordinate CrossProduct(Coordinate);
-	float DotProduct(Coordinate);
 };
