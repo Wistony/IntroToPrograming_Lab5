@@ -29,3 +29,30 @@ public:
     int8_t greenComponent;
     int8_t blueComponent;
 } RGBQUAD;
+
+class picture {
+    
+    BMPHEAD header;
+    RGBQUAD  **array;
+    
+public:
+    picture() {};
+    void writePicture();
+};
+
+void picture::writePicture()
+{
+    string line; line = "";  // путь к файлу для записи
+    
+    const char *file = line;
+    
+    FILE *fp2 = fopen(file, "wb");
+    
+    int32_t headerDepthOld = header.depth; // размеры исходника
+    int32_t headerWidthOld = header.width;
+    
+    header.depth = int(header.depth * factor);
+    header.width = int(header.width * factor); // NEW EDIT
+    
+
+}
