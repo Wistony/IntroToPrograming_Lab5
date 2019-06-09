@@ -1,13 +1,11 @@
 #include <iostream>
 #include "Coordinate.h"
+#include "RayTracer.h"
 using namespace std;
 
 int main() {
-
-	Coordinate temp(1, 1, 1);
-	Coordinate first(1, 2, 3);
-	Coordinate t = temp + first;
-	t.getCoordinate();
+	RayTracer g;
+	g.tracer();
 	cin.get();
 	//some commit;
 }
